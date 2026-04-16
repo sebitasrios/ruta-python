@@ -1,0 +1,417 @@
+Modelo relacional · HTML
+Copiar
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo Relacional - Base de Datos Bibliográfica</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .diagram-container {
+            position: relative;
+            width: 100%;
+            height: 1400px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            overflow: hidden;
+        }
+        
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .entity {
+            position: absolute;
+            background: white;
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 2;
+            min-width: 200px;
+        }
+        
+        .entity-header {
+            background: #4a5568;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 6px 6px 0 0;
+            font-size: 14px;
+        }
+        
+        .entity-attributes {
+            padding: 8px;
+            font-size: 12px;
+        }
+        
+        .attribute {
+            padding: 3px 8px;
+            margin: 2px 0;
+            border-left: 3px solid transparent;
+        }
+        
+        .pk {
+            border-left-color: #f6ad55;
+            font-weight: bold;
+            background: #fef5e7;
+        }
+        
+        .fk {
+            border-left-color: #63b3ed;
+            background: #ebf8ff;
+        }
+        
+        .normal {
+            border-left-color: #48bb78;
+        }
+        
+        /* Entidades principales */
+        .entity.main {
+            border-color: #2c5282;
+        }
+        
+        .entity.main .entity-header {
+            background: #2c5282;
+        }
+        
+        /* Entidades de especialización */
+        .entity.specialization {
+            border-color: #9f7aea;
+        }
+        
+        .entity.specialization .entity-header {
+            background: #9f7aea;
+        }
+        
+        /* Tablas intermedias */
+        .entity.intermediate {
+            border-color: #38a169;
+        }
+        
+        .entity.intermediate .entity-header {
+            background: #38a169;
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            z-index: 3;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin-right: 8px;
+            border: 1px solid #333;
+        }
+        
+        .relationship-label {
+            position: absolute;
+            background: #fef5e7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            border: 1px solid #f6ad55;
+            z-index: 2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modelo Relacional - Base de Datos Bibliográfica</h1>
+        <p class="subtitle">Grupo de Investigación Automática, Electrónica y Ciencias Computacionales - ITM</p>
+        
+        <div class="diagram-container">
+            <!-- SVG para las líneas de relación -->
+            <svg>
+                <!-- ARTICULO a INFORME_TECNICO -->
+                <line x1="300" y1="150" x2="300" y2="350" stroke="#9f7aea" stroke-width="2"/>
+                
+                <!-- ARTICULO a ARTICULO_CONGRESO -->
+                <line x1="300" y1="150" x2="680" y2="350" stroke="#9f7aea" stroke-width="2"/>
+                
+                <!-- ARTICULO a ARTICULO_REVISTA -->
+                <line x1="300" y1="150" x2="1050" y2="350" stroke="#9f7aea" stroke-width="2"/>
+                
+                <!-- ARTICULO_CONGRESO a CONGRESO -->
+                <line x1="780" y1="450" x2="680" y2="630" stroke="#4a5568" stroke-width="2"/>
+                
+                <!-- ARTICULO_REVISTA a REVISTA -->
+                <line x1="1150" y1="450" x2="1050" y2="630" stroke="#4a5568" stroke-width="2"/>
+                
+                <!-- ARTICULO a ARTICULO_AUTOR -->
+                <line x1="400" y1="100" x2="300" y2="850" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- AUTOR a ARTICULO_AUTOR -->
+                <line x1="300" y1="1050" x2="300" y2="950" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- ARTICULO a ARTICULO_PALABRA_CLAVE -->
+                <line x1="400" y1="130" x2="680" y2="850" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- PALABRA_CLAVE a ARTICULO_PALABRA_CLAVE -->
+                <line x1="680" y1="1050" x2="680" y2="950" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- ARTICULO a ARTICULO_UBICACION -->
+                <line x1="200" y1="100" x2="100" y2="850" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- UBICACION a ARTICULO_UBICACION -->
+                <line x1="100" y1="1050" x2="100" y2="950" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- AUTOR a AUTOR_TEMA -->
+                <line x1="400" y1="1150" x2="1050" y2="1050" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- TEMA_INVESTIGACION a AUTOR_TEMA -->
+                <line x1="1150" y1="1150" x2="1150" y2="1050" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- REVISTA a REVISTA_TEMA -->
+                <line x1="1150" y1="730" x2="1350" y2="850" stroke="#38a169" stroke-width="2"/>
+                
+                <!-- TEMA_INVESTIGACION a REVISTA_TEMA -->
+                <line x1="1250" y1="1150" x2="1350" y2="950" stroke="#38a169" stroke-width="2"/>
+            </svg>
+            
+            <!-- Labels de cardinalidad -->
+            <div class="relationship-label" style="top: 200px; left: 310px;">(1,1)</div>
+            <div class="relationship-label" style="top: 880px; left: 250px;">(1,n)</div>
+            <div class="relationship-label" style="top: 1000px; left: 250px;">(1,n)</div>
+            
+            <!-- Entidad ARTICULO -->
+            <div class="entity main" style="top: 20px; left: 150px;">
+                <div class="entity-header">ARTICULO</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_articulo</div>
+                    <div class="attribute normal">titulo</div>
+                    <div class="attribute normal">email_contacto</div>
+                    <div class="attribute normal">tiene_copia</div>
+                </div>
+            </div>
+            
+            <!-- Entidad INFORME_TECNICO -->
+            <div class="entity specialization" style="top: 350px; left: 150px;">
+                <div class="entity-header">INFORME_TECNICO</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_articulo (FK)</div>
+                    <div class="attribute normal">numero_informe</div>
+                    <div class="attribute normal">centro_publicacion</div>
+                    <div class="attribute normal">mes_publicacion</div>
+                    <div class="attribute normal">año_publicacion</div>
+                </div>
+            </div>
+            
+            <!-- Entidad ARTICULO_CONGRESO -->
+            <div class="entity specialization" style="top: 350px; left: 530px;">
+                <div class="entity-header">ARTICULO_CONGRESO</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_articulo (FK)</div>
+                    <div class="attribute fk">🔗 id_congreso (FK)</div>
+                    <div class="attribute normal">edicion</div>
+                    <div class="attribute normal">ciudad</div>
+                    <div class="attribute normal">pais</div>
+                    <div class="attribute normal">fecha_inicio</div>
+                    <div class="attribute normal">fecha_fin</div>
+                </div>
+            </div>
+            
+            <!-- Entidad CONGRESO -->
+            <div class="entity main" style="top: 630px; left: 530px;">
+                <div class="entity-header">CONGRESO</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_congreso</div>
+                    <div class="attribute normal">nombre_congreso</div>
+                    <div class="attribute normal">tipo</div>
+                    <div class="attribute normal">frecuencia</div>
+                    <div class="attribute normal">año_primera_edicion</div>
+                </div>
+            </div>
+            
+            <!-- Entidad ARTICULO_REVISTA -->
+            <div class="entity specialization" style="top: 350px; left: 900px;">
+                <div class="entity-header">ARTICULO_REVISTA</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_articulo (FK)</div>
+                    <div class="attribute fk">🔗 id_revista (FK)</div>
+                    <div class="attribute normal">numero_revista</div>
+                    <div class="attribute normal">pagina_inicio</div>
+                    <div class="attribute normal">pagina_fin</div>
+                    <div class="attribute normal">año_publicacion</div>
+                </div>
+            </div>
+            
+            <!-- Entidad REVISTA -->
+            <div class="entity main" style="top: 630px; left: 900px;">
+                <div class="entity-header">REVISTA</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_revista</div>
+                    <div class="attribute normal">nombre_revista</div>
+                    <div class="attribute normal">editor</div>
+                    <div class="attribute normal">año_inicio_publicacion</div>
+                    <div class="attribute normal">frecuencia</div>
+                </div>
+            </div>
+            
+            <!-- Entidad ARTICULO_AUTOR -->
+            <div class="entity intermediate" style="top: 850px; left: 150px;">
+                <div class="entity-header">ARTICULO_AUTOR</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_articulo (FK)</div>
+                    <div class="attribute pk">🔑 id_autor (FK)</div>
+                    <div class="attribute normal">orden_autoria</div>
+                </div>
+            </div>
+            
+            <!-- Entidad AUTOR -->
+            <div class="entity main" style="top: 1050px; left: 150px;">
+                <div class="entity-header">AUTOR</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_autor</div>
+                    <div class="attribute normal">nombre</div>
+                    <div class="attribute normal">email</div>
+                    <div class="attribute normal">centro_trabajo</div>
+                </div>
+            </div>
+            
+            <!-- Entidad ARTICULO_PALABRA_CLAVE -->
+            <div class="entity intermediate" style="top: 850px; left: 530px;">
+                <div class="entity-header">ARTICULO_PALABRA_CLAVE</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_articulo (FK)</div>
+                    <div class="attribute pk">🔑 id_palabra_clave (FK)</div>
+                </div>
+            </div>
+            
+            <!-- Entidad PALABRA_CLAVE -->
+            <div class="entity main" style="top: 1050px; left: 530px;">
+                <div class="entity-header">PALABRA_CLAVE</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_palabra_clave</div>
+                    <div class="attribute normal">palabra</div>
+                </div>
+            </div>
+            
+            <!-- Entidad ARTICULO_UBICACION -->
+            <div class="entity intermediate" style="top: 850px; left: 0px;">
+                <div class="entity-header">ARTICULO_UBICACION</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_articulo (FK)</div>
+                    <div class="attribute fk">🔗 id_ubicacion (FK)</div>
+                </div>
+            </div>
+            
+            <!-- Entidad UBICACION -->
+            <div class="entity main" style="top: 1050px; left: 0px;">
+                <div class="entity-header">UBICACION</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_ubicacion</div>
+                    <div class="attribute normal">tipo_ubicacion</div>
+                    <div class="attribute normal">descripcion</div>
+                </div>
+            </div>
+            
+            <!-- Entidad AUTOR_TEMA -->
+            <div class="entity intermediate" style="top: 950px; left: 900px;">
+                <div class="entity-header">AUTOR_TEMA</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_autor (FK)</div>
+                    <div class="attribute pk">🔑 id_tema (FK)</div>
+                </div>
+            </div>
+            
+            <!-- Entidad TEMA_INVESTIGACION -->
+            <div class="entity main" style="top: 1150px; left: 1050px;">
+                <div class="entity-header">TEMA_INVESTIGACION</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_tema</div>
+                    <div class="attribute normal">nombre_tema</div>
+                </div>
+            </div>
+            
+            <!-- Entidad REVISTA_TEMA -->
+            <div class="entity intermediate" style="top: 850px; left: 1250px;">
+                <div class="entity-header">REVISTA_TEMA</div>
+                <div class="entity-attributes">
+                    <div class="attribute pk">🔑 id_revista (FK)</div>
+                    <div class="attribute pk">🔑 id_tema (FK)</div>
+                </div>
+            </div>
+            
+            <!-- Leyenda -->
+            <div class="legend">
+                <h3 style="margin: 0 0 10px 0; font-size: 14px;">Leyenda</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #2c5282;"></div>
+                    <span>Entidad Principal</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #9f7aea;"></div>
+                    <span>Especialización</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #38a169;"></div>
+                    <span>Tabla Intermedia</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #fef5e7; border: 2px solid #f6ad55;"></div>
+                    <span>Clave Primaria (PK)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ebf8ff; border: 2px solid #63b3ed;"></div>
+                    <span>Clave Foránea (FK)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

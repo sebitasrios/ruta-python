@@ -1,0 +1,191 @@
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
+import random
+    
+
+# Configurar semilla para reproducibilidad
+np.random.seed(42)
+random.seed(42)
+
+# Definir ciudades principales de Colombia
+ciudades = [
+    "Bogotá",
+    "Medellín",
+    "Cali",
+    "Barranquilla",
+    "Cartagena",
+    "Bucaramanga",
+    "Pereira",
+    "Santa Marta",
+    "Ibagué",
+    "Pasto",
+    "Manizales",
+    "Neiva",
+    "Villavicencio",
+    "Armenia",
+    "Popayán",
+]
+
+# Tipos de transporte
+tipos_transporte = ["Terrestre", "Aéreo", "Marítimo", "Fluvial"]
+
+# Tipos de carga
+tipos_carga = ["General", "Refrigerada", "Peligrosa", "Sobredimensionada", "Líquidos"]
+
+# Empresas transportadoras (simuladas)
+empresas = [
+    "TransColombia S.A.",
+    "LogiExpress",
+    "CargoNacional",
+    "MoviCarga",
+    "ExpressTrans",
+    "CargaSur",
+    "LogiNorte",
+    "TransAndino",
+    "CargoRápido",
+    "LogiCosta",
+]
+
+# Generar datos
+datos = []
+fecha_inicio = datetime(2020, 1, 1)
+fecha_fin = datetime(2024, 12, 31)
+
+# Generar 2000 registros
+for i in range(2000):
+    # Fecha aleatoria entre 2020 y 2024
+    fecha_random = fecha_inicio + timedelta(
+        days=random.randint(0, (fecha_fin - fecha_inicio).days)
+    )
+
+    # Seleccionar ciudades origen y destino diferentes
+    origen = random.choice(ciudades)
+    destino = random.choice([c for c in ciudades if c != origen])
+
+    # Tipo de transporte
+    transporte = random.choice(tipos_transporte)
+
+    # Tipo de carga
+    carga = random.choice(tipos_carga)
+
+    # Empresa
+    empresa = random.choice(empresas)
+
+    # Peso (kg) - entre 100 y 50000 kg
+    peso = round(random.uniform(100, 50000), 2)
+
+    # Distancia (km) - basada en distancias aproximadas reales entre ciudades
+    if transporte == "Aéreo":
+        distancia = round(random.uniform(200, 1200), 1)
+    elif transporte == "Marítimo":
+        distancia = round(random.uniform(300, 2000), 1)
+    elif transporte == "Fluvial":
+        distancia = round(random.uniform(150, 800), 1)
+    else:  # Terrestre
+        distancia = round(random.uniform(50, 1500), 1)
+
+    # Tiempo planificado (horas) - basado en tipo de transporte y distancia
+    if transporte == "Aéreo":
+        tiempo_planificado = round(random.uniform(2, 8), 1)
+    elif transporte == "Marítimo":
+        tiempo_planificado = round(random.uniform(24, 120), 1)
+    elif transporte == "Fluvial":
+        tiempo_planificado = round(random.uniform(12, 72), 1)
+    else:  # Terrestre
+        tiempo_planificado = round(distancia / random.uniform(40, 80), 1)
+
+    # Tiempo real (horas) - con variación del -20% a +50% del planificado
+    factor_variacion = random.uniform(0.8, 1.5)
+    tiempo_real = round(tiempo_planificado * factor_variacion, 1)
+
+    # Retraso (horas)
+    retraso = round(max(0, tiempo_real - tiempo_planificado), 1)
+
+    # Costo (COP) - basado en peso, distancia y tipo de transporte
+    costo_base = peso * distancia * random.uniform(0.5, 3.0)
+    if transporte == "Aéreo":
+        costo_base *= random.uniform(3, 5)
+    elif transporte == "Marítimo":
+        costo_base *= random.uniform(0.8, 1.5)
+    elif transporte == "Fluvial":
+        costo_base *= random.uniform(1.0, 2.0)
+
+    costo = round(costo_base)
+
+    # Estado de entrega
+    estados = ["Entregado", "En Tránsito", "Retrasado", "Devuelto"]
+    probabilidades = [0.75, 0.10, 0.13, 0.02]  # Mayor probabilidad de entregado
+    estado = np.random.choice(estados, p=probabilidades)
+
+    # Temperatura (solo para carga refrigerada)
+    temperatura = round(random.uniform(-5, 8), 1) if carga == "Refrigerada" else None
+
+    # Número de paradas
+    paradas = random.randint(0, 5) if transporte == "Terrestre" else 0
+
+    # Calificación del servicio (1-5)
+    if retraso == 0:
+        calificacion = round(random.uniform(4.0, 5.0), 1)
+    elif retraso <= 2:
+        calificacion = round(random.uniform(3.5, 4.5), 1)
+    elif retraso <= 8:
+        calificacion = round(random.uniform(2.5, 3.5), 1)
+    else:
+        calificacion = round(random.uniform(1.0, 2.5), 1)
+
+    # Agregar registro
+    datos.append(
+        {
+            "fecha": fecha_random.strftime("%Y-%m-%d"),
+            "año": fecha_random.year,
+            "mes": fecha_random.month,
+            "ciudad_origen": origen,
+            "ciudad_destino": destino,
+            "tipo_transporte": transporte,
+            "tipo_carga": carga,
+            "empresa_transportadora": empresa,
+            "peso_kg": peso,
+            "distancia_km": distancia,
+            "tiempo_planificado_horas": tiempo_planificado,
+            "tiempo_real_horas": tiempo_real,
+            "retraso_horas": retraso,
+            "costo_cop": costo,
+            "estado_entrega": estado,
+            "temperatura_celsius": temperatura,
+            "numero_paradas": paradas,
+            "calificacion_servicio": calificacion,
+        }
+    )
+
+# Crear DataFrame
+df = pd.DataFrame(datos)
+
+# Mostrar información del dataset
+print("Dataset de Tiempos Logísticos de Colombia (2020-2024)")
+print("=" * 55)
+print(f"Total de registros: {len(df)}")
+print(f"Período: {df['fecha'].min()} a {df['fecha'].max()}")
+print(f"\nColumnas: {len(df.columns)}")
+print("\nPrimeras 5 filas:")
+print(df.head())
+
+print("\nInformación general:")
+print(df.info())
+
+print("\nEstadísticas descriptivas:")
+print(df.describe())
+
+# Guardar como CSV
+nombre_archivo = "tiemposlogisticos.csv"
+df.to_csv(nombre_archivo, index=False)
+print(f"\n✅ Dataset guardado como '{nombre_archivo}'")
+
+# Mostrar algunos análisis básicos
+print("\n📊 Análisis básico:")
+print(f"Tipos de transporte: {df['tipo_transporte'].value_counts().to_dict()}")
+print(
+    f"Ciudades más frecuentes como origen: {df['ciudad_origen'].value_counts().head(3).to_dict()}"
+)
+print(f"Retraso promedio: {df['retraso_horas'].mean():.1f} horas")
+print(f"Calificación promedio: {df['calificacion_servicio'].mean():.1f}/5.0")
