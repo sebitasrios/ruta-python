@@ -1,39 +1,40 @@
-# 🐍 Ruta de Aprendizaje — Python
+# 🐍 Python Learning Path
 
-Repositorio con todos los proyectos y ejercicios de mi ruta de aprendizaje en Python,
-desarrollados a partir de cursos en YouTube, la universidad (ITM) y estudio autodidacta.
+Repository containing all projects and exercises from my Python learning path,
+developed through YouTube courses, university (ITM) and self-study.
 
-## 📁 Estructura del repositorio
+## 📁 Repository Structure
 
-| Carpeta | Contenido |
+| Folder | Content |
 |---|---|
-| `01-basic.py` | Print, variables, tipos de datos, input |
-| `02-flow_control.py` | If, booleanos, listas y métodos |
-| `03_loops` | While, for, range, funciones básicas |
-| `04_logic.py` | Retos lógicos y diccionarios |
-| `05_regex` | Expresiones regulares |
-| `control-flujo` | Comparadores, ternario, loops anidados |
-| `funciones` | Args, kwargs, return, alcance, depuración |
-| `tipos` | Strings, números, calculadora, conversión |
-| `tipos-avanzados` | Listas, tuplas, sets, diccionarios |
-| `basededatos.py` | Análisis de datos con Python |
-| `itm-python` | Ejercicios universitarios |
+| `01-basic.py` | Print, variables, data types, input |
+| `02-flow_control.py` | If statements, booleans, lists and methods |
+| `03_loops` | While, for, range, basic functions |
+| `04_logic.py` | Logic challenges and dictionaries |
+| `05_regex` | Regular expressions |
+| `control-flujo` | Comparators, ternary operator, nested loops |
+| `funciones` | Args, kwargs, return, scope, debugging |
+| `tipos` | Strings, numbers, calculator, type conversion |
+| `tipos-avanzados` | Lists, tuples, sets, dictionaries |
+| `basededatos.py` | Data processing with Python |
+| `itm-python` | University exercises |
 
-## 🛠️ Tecnologías
+## 🛠️ Technologies
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
 ![VS Code](https://img.shields.io/badge/Editor-VS%20Code-blue?logo=visualstudiocode)
 ![Git](https://img.shields.io/badge/Control-Git-orange?logo=git)
 
-## 🎯 Objetivo
+## 🎯 Goal
 
-Este repositorio forma parte de mi portafolio como desarrollador en formación.
-Busco aplicar estos conocimientos en proyectos reales y seguir creciendo
-profesionalmente en el área de desarrollo de software.
+This repository is part of my portfolio as a software developer in training.
+I am building real skills through hands-on projects while growing
+professionally in software development and web development.
 
-## 👤 Autor
+## 👤 Author
 
 **Sebastián Ríos Ríos**
 📧 sebasri92@gmail.com
 🔗 [GitHub](https://github.com/sebitasrios)
+🔗 [LinkedIn](https://www.linkedin.com/in/sebastianriosdev/)
 📍 Medellín, Colombia
