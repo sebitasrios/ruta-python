@@ -1,40 +1,69 @@
-# 🐍 Python Learning Path
+<h1 align="center">Sebastián Ríos Ríos</h1>
+<h3 align="center">Software Development Technology Student</h3>
+<h4 align="center">Medellín, Colombia · Open to new opportunities</h4>
 
-Repository containing all projects and exercises from my Python learning path,
-developed through YouTube courses, university (ITM) and self-study.
+---
 
-## 📁 Repository Structure
+## About Me
 
-| Folder | Content |
-|---|---|
-| `01-basic.py` | Print, variables, data types, input |
-| `02-flow_control.py` | If statements, booleans, lists and methods |
-| `03_loops` | While, for, range, basic functions |
-| `04_logic.py` | Logic challenges and dictionaries |
-| `05_regex` | Regular expressions |
-| `control-flujo` | Comparators, ternary operator, nested loops |
-| `funciones` | Args, kwargs, return, scope, debugging |
-| `tipos` | Strings, numbers, calculator, type conversion |
-| `tipos-avanzados` | Lists, tuples, sets, dictionaries |
-| `basededatos.py` | Data processing with Python |
-| `itm-python` | University exercises |
+Software Development Technology student at ITM with basic knowledge in
+object-oriented programming, web interface design and database management.
+I stand out for my fast learning ability, logical thinking and
+problem-solving orientation. Currently building my portfolio with real
+projects while advancing in my technical training.
 
-## 🛠️ Technologies
+---
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
-![VS Code](https://img.shields.io/badge/Editor-VS%20Code-blue?logo=visualstudiocode)
-![Git](https://img.shields.io/badge/Control-Git-orange?logo=git)
+## Technologies & Tools
 
-## 🎯 Goal
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
 
-This repository is part of my portfolio as a software developer in training.
-I am building real skills through hands-on projects while growing
-professionally in software development and web development.
+---
 
-## 👤 Author
+## Focus Areas
 
-**Sebastián Ríos Ríos**
-📧 sebasri92@gmail.com
-🔗 [GitHub](https://github.com/sebitasrios)
-🔗 [LinkedIn](https://www.linkedin.com/in/sebastianriosdev/)
-📍 Medellín, Colombia
+**Software Development**
+Fundamentals of object-oriented programming, data structures and
+programming logic applied in Python and Java. Basic knowledge
+in SQL for queries and relational database management.
+
+**Web Development**
+Building web interfaces with HTML5, CSS3 and JavaScript.
+Focus on semantic structure and responsive design.
+
+---
+
+## Projects
+
+| Repository | Description | Technologies |
+|---|---|---|
+| [ruta-python](https://github.com/sebitasrios/ruta-python) | Python learning path with exercises and projects | Python |
+
+---
+
+## Stats
+
+<p align="center">
+  <img height="160" src="https://github-readme-stats.vercel.app/api?username=sebitasrios&show_icons=true&theme=default&hide_border=true&count_private=true" />
+  <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sebitasrios&layout=compact&theme=default&hide_border=true" />
+</p>
+
+---
+
+## Contact
+
+[![Email](https://img.shields.io/badge/Email-sebasri92%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:sebasri92@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Sebasti%C3%A1n%20R%C3%ADos-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sebastianriosdev/)
+[![GitHub](https://img.shields.io/badge/GitHub-sebitasrios-181717?style=flat&logo=github&logoColor=white)](https://github.com/sebitasrios)
+
+---
+
+<p align="center">
+  <i>Open to opportunities in software development and web development.</i>
+</p>
